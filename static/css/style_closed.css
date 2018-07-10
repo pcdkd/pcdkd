@@ -1,0 +1,212 @@
+@font-face {
+    font-family: toll;
+    src: url(toll.otf);
+}
+
+html{
+    background-color: black;
+    font-family: toll, arial, sans-serif;
+}
+
+
+
+#main{
+    position: fixed;
+    overflow-y: scroll;
+    top:2%;
+    left:2%;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
+    color: white;
+    font-size: 6em;
+    line-height: 1.3em;
+    letter-spacing: 0.09em;
+}
+
+.underline{
+    text-decoration: underline;
+    text-decoration:none;
+    border-style: solid black;
+    border-bottom:  5.5px solid #ffffff;
+    padding-bottom: 3px;
+}
+
+
+/* ----------- iPhone 5 and 5S ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+#main{
+    position: fixed;
+    overflow-y: scroll;
+    top:1%;
+    left:4%;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
+    color: white;
+    font-size: 1.4em;
+    line-height: 1.3em;
+    letter-spacing: 0.09em;
+}
+.underline{
+    text-decoration: underline;
+    text-decoration:none;
+    border-style: solid black;
+    border-bottom:  2px solid #ffffff;
+    padding-bottom: 2px;
+}
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+#main{
+    position: fixed;
+    overflow-y: scroll;
+    top:2%;
+    left:2%;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
+    color: white;
+    font-size: 1em;
+    line-height: 1.3em;
+    letter-spacing: 0.09em;
+}
+.underline{
+    text-decoration: underline;
+    text-decoration:none;
+    border-style: solid black;
+    border-bottom:  2px solid #ffffff;
+    padding-bottom: 2px;
+}
+}
+
+
+
+/* ----------- iPhone 6 ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+#main{
+    position: fixed;
+    overflow-y: scroll;
+    top:1%;
+    left:4%;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
+    color: white;
+    font-size: 1.8em;
+    line-height: 1.3em;
+    letter-spacing: 0.09em;
+}
+.underline{
+    text-decoration: underline;
+    text-decoration:none;
+    border-style: solid black;
+    border-bottom:  2px solid #ffffff;
+    padding-bottom: 2px;
+}
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+#main{
+    position: fixed;
+    overflow-y: scroll;
+    top:1%;
+    left:2%;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
+    color: white;
+    font-size: 2.8em;
+    line-height: 1.3em;
+    letter-spacing: 0.09em;
+}
+.underline{
+    text-decoration: underline;
+    text-decoration:none;
+    border-style: solid black;
+    border-bottom:  3px solid #ffffff;
+    padding-bottom: 2px;
+}
+}
+
+/* 1024 bis 1920 width */
+@media only screen
+  and (min-device-width: 1024px)
+  and (max-device-width: 1599px)
+    and (-webkit-min-device-pixel-ratio: 2) {
+#main{
+    position: fixed;
+    overflow-y: scroll;
+    top:1%;
+    left:2%;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
+    color: white;
+    font-size: 5em;
+    line-height: 1.3em;
+    letter-spacing: 0.09em;
+}
+.underline{
+    text-decoration: underline;
+    text-decoration:none;
+    border-style: solid black;
+    border-bottom:  4px solid #ffffff;
+    padding-bottom: 3px;
+}
+}
+
+@media only screen
+  and (min-device-width: 1600px)
+  and (max-device-width: 1920px)
+    and (-webkit-min-device-pixel-ratio: 2) {
+#main{
+    position: fixed;
+    overflow-y: scroll;
+    top:1%;
+    left:2%;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
+    color: white;
+    font-size: 6em;
+    line-height: 1.3em;
+    letter-spacing: 0.09em;
+}
+.underline{
+    text-decoration: underline;
+    text-decoration:none;
+    border-style: solid black;
+    border-bottom:  4px solid #ffffff;
+    padding-bottom: 3px;
+}
+}
