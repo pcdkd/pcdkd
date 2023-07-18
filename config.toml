@@ -1,3 +1,5 @@
-baseURL = "http://pcdkd.xyz/"
+baseURL = "/"
 languageCode = "en-us"
-title = "pcdkd — Daniel Dewar @ Paperchain"
+title = "pcdkd-fyi"
+
+disableKinds = ["taxonomy", "taxonomyTerm"]
