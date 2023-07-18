@@ -1,0 +1,5 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "pcdkd-fyi"
+
+disableKinds = ["taxonomy", "taxonomyTerm"]
