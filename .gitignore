@@ -1,5 +1,6 @@
-# Hugo build output
+# Build output
 public
+dist
 
 # Local Netlify folder
 .netlify
