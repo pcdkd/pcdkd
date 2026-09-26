@@ -268,9 +268,33 @@
           while (flakes.length < nf) flakes.push({ x: Math.random() * W, y: Math.random() * H, v: 14 + Math.random() * 22, ph: Math.random() * 6.28, s: Math.random() < .3 ? 2 : 1 });
           flakes.length = nf;
         }
+        // Window lights: small bright warm blobs above the waterline. About 40% twinkle at night, a few blink on and off.
+        var lights = [], tw = 0;
+        function findLights() {
+          var o = original.data, LIM = 300, seen = new Uint8Array(W * LIM);
+          function lit(x, y) { var i = (y * W + x) * 4; return o[i] > 120 && o[i] > o[i + 2] * 1.28 && o[i + 1] > o[i + 2] * 1.08; }
+          for (var y = 0; y < LIM; y++) for (var x = 0; x < W; x++) {
+            if (seen[y * W + x] || !lit(x, y)) continue;
+            var stack = [[x, y]], px = []; seen[y * W + x] = 1;
+            while (stack.length) {
+              var p = stack.pop(); px.push(p);
+              var nb = [[p[0] + 1, p[1]], [p[0] - 1, p[1]], [p[0], p[1] + 1], [p[0], p[1] - 1]];
+              for (var k = 0; k < 4; k++) {
+                var nx = nb[k][0], ny = nb[k][1];
+                if (nx < 0 || nx >= W || ny < 0 || ny >= LIM || seen[ny * W + nx] || !lit(nx, ny)) continue;
+                seen[ny * W + nx] = 1; stack.push([nx, ny]);
+              }
+            }
+            if (px.length > 12) continue; // larger blobs are outlines, not windows
+            var mode = Math.random();
+            if (mode < .40) lights.push({ px: px, ph: Math.random() * 6.28, sp: .8 + Math.random() * 2.4, amp: .3 + Math.random() * .5, blink: false });
+            else if (mode < .46) lights.push({ px: px, next: Math.random() * 10, on: true, blink: true });
+          }
+        }
         img.onload = function () {
           bx.drawImage(img, 0, 0, W, H);
           original = bx.getImageData(0, 0, W, H);
+          findLights();
           el.classList.add('ready');
           function animate(ts) {
             requestAnimationFrame(animate);
@@ -278,6 +302,7 @@
             var dt = Math.min(100, ts - last); last = ts;
             if (document.hidden) return;
             if (!waterPaused) time += dt / 1000 * (1 + wx.wind * .7);
+            if (!waterPaused) tw += dt / 1000;
             if (seededFor !== wxVersion) { seededFor = wxVersion; seedParticles(); }
             var bucket = Math.floor(now().getTime() / 30000) + ':' + wxVersion;
             if (bucket !== cache) {
@@ -318,6 +343,21 @@
               ctx.drawImage(graded, 0, Math.max(285, Math.min(H - 1, y + dy)), W, 1, dx, y, W, 1);
             }
             ctx.restore();
+
+            // Twinkling windows, fading in with dusk. Skipped under reduced motion.
+            if (grade.night > .05 && lights.length && !waterPaused) {
+              var nv = grade.night;
+              for (var li = 0; li < lights.length; li++) {
+                var L = lights[li], bright;
+                if (L.blink) {
+                  if (tw > L.next) { L.on = !L.on; L.next = tw + (L.on ? 4 + Math.random() * 12 : 1.5 + Math.random() * 5); }
+                  bright = L.on ? 1 : .2;
+                } else bright = 1 + Math.sin(tw * L.sp + L.ph) * L.amp;
+                if (Math.abs(bright - 1) < .04) continue;
+                ctx.fillStyle = bright < 1 ? 'rgba(22,24,38,' + ((1 - bright) * nv).toFixed(2) + ')' : 'rgba(255,228,170,' + ((bright - 1) * nv * .7).toFixed(2) + ')';
+                for (var q = 0; q < L.px.length; q++) ctx.fillRect(L.px[q][0], L.px[q][1], 1, 1);
+              }
+            }
 
             // Fog: banded so it reads as pixel art, thickest over distant Manhattan, thin on the near rocks.
             if (wx.fog) {
