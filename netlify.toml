@@ -1,3 +1,10 @@
 [build]
-  command = "mkdir -p dist/.well-known && cp layouts/index.html dist/index.html && cp static/skyline.png dist/skyline.png && cp static/.well-known/nostr.json dist/.well-known/nostr.json"
+  command = "mkdir -p dist/.well-known && cp layouts/index.html dist/index.html && cp static/skyline-768.png dist/skyline-768.png && cp static/.well-known/nostr.json dist/.well-known/nostr.json"
   publish = "dist"
+
+# The skyline image is served under a versioned name so it can be cached for a year.
+# To replace it, ship a new filename and update the references in layouts/index.html.
+[[headers]]
+  for = "/skyline-*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
